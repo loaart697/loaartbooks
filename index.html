@@ -3,1037 +3,574 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>프리미엄 작가 데뷔 프로그램 | 로아아트북스</title>
+    <title>AI 동화책 창작 프로그램 | 로아아트북스</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            line-height: 1.8;
-            color: #0f0f0f;
             background: #000;
+            color: #f5f5f5;
             overflow-x: hidden;
         }
-        
-        /* Hero Section - Ultra Luxury */
+
+        /* 히어로 섹션 */
         .hero {
-            background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
-            color: #fff;
-            padding: 120px 20px 140px;
-            text-align: center;
             position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #0f0f23 100%);
             overflow: hidden;
         }
-        
+
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(184, 134, 11, 0.1) 0%, transparent 50%);
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(218,165,32,0.15) 0%, transparent 70%);
             animation: shimmer 8s ease-in-out infinite;
         }
-        
+
         @keyframes shimmer {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(20px, 20px) rotate(5deg); }
         }
-        
+
         .hero-content {
             position: relative;
-            z-index: 1;
-            max-width: 1100px;
-            margin: 0 auto;
+            z-index: 2;
+            max-width: 1000px;
         }
-        
-        .exclusive-badge {
+
+        .badge {
             display: inline-block;
-            background: linear-gradient(135deg, #d4af37, #f4e5a1);
+            padding: 12px 32px;
+            background: linear-gradient(135deg, #daa520, #ffd700, #b8860b);
             color: #000;
-            padding: 12px 40px;
-            border-radius: 50px;
+            font-weight: 900;
             font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 30px;
             letter-spacing: 3px;
-            text-transform: uppercase;
-            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
-            animation: float 3s ease-in-out infinite;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(218,165,32,0.6);
+            animation: glow 2s ease-in-out infinite;
         }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 30px rgba(218,165,32,0.6); }
+            50% { box-shadow: 0 0 50px rgba(218,165,32,0.9); }
         }
-        
-        .hero h1 {
+
+        h1 {
+            font-family: 'Noto Serif KR', serif;
             font-size: 72px;
             font-weight: 900;
-            margin-bottom: 35px;
+            margin: 30px 0;
             line-height: 1.2;
-            font-family: 'Noto Serif KR', serif;
-            background: linear-gradient(135deg, #d4af37, #f9e79f, #d4af37);
+        }
+
+        .title-highlight {
+            background: linear-gradient(135deg, #ffd700, #ffed4e, #ffc700);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            background-clip: text;
+            font-size: 88px;
+            display: block;
+            animation: textShimmer 3s ease-in-out infinite;
         }
-        
-        .hero .tagline {
-            font-size: 32px;
-            margin-bottom: 25px;
+
+        @keyframes textShimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
             font-weight: 300;
-            color: #f4e5a1;
-            letter-spacing: 2px;
+            margin: 30px 0;
+            color: #c0c0c0;
+            line-height: 1.6;
         }
-        
-        .hero .subtitle {
-            font-size: 20px;
-            margin-bottom: 50px;
-            opacity: 0.9;
-            line-height: 1.8;
-            color: #d4d4d4;
-        }
-        
-        .price-hero {
-            font-size: 80px;
+
+        .hero-price {
+            font-size: 56px;
             font-weight: 900;
-            margin: 40px 0;
-            background: linear-gradient(135deg, #d4af37, #f9e79f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 5px 20px rgba(212, 175, 55, 0.5);
-            letter-spacing: -2px;
+            color: #ffd700;
+            margin: 30px 0;
+            font-family: 'Noto Serif KR', serif;
         }
-        
-        .price-note {
-            font-size: 18px;
-            color: #b8b8b8;
-            margin-bottom: 50px;
-        }
-        
-        .cta-primary {
+
+        .cta-btn {
             display: inline-block;
-            background: linear-gradient(135deg, #d4af37, #f4e5a1);
+            padding: 22px 60px;
+            background: linear-gradient(135deg, #daa520, #ffd700);
             color: #000;
-            padding: 25px 70px;
-            border-radius: 50px;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 900;
             text-decoration: none;
-            transition: all 0.4s ease;
-            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.5);
-            cursor: pointer;
-            border: none;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            border-radius: 50px;
+            margin-top: 30px;
+            box-shadow: 0 10px 40px rgba(218,165,32,0.4);
+            transition: all 0.3s ease;
         }
-        
-        .cta-primary:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 25px 70px rgba(212, 175, 55, 0.7);
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(218,165,32,0.6);
         }
-        
-        /* Stats Section */
-        .stats-section {
-            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
-            padding: 80px 20px;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        
-        .stats-grid {
+
+        /* 통계 섹션 */
+        .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 50px;
-            max-width: 1100px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .stat-item {
-            padding: 30px;
-        }
-        
-        .stat-number {
-            font-size: 64px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #d4af37, #f9e79f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-        }
-        
-        .stat-label {
-            font-size: 16px;
-            color: #b8b8b8;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-        
-        /* Value Proposition */
-        .value-section {
-            background: #000;
-            padding: 120px 20px;
-            text-align: center;
-        }
-        
-        .section-title {
-            font-size: 56px;
-            font-weight: 900;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, #d4af37, #f9e79f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-family: 'Noto Serif KR', serif;
-        }
-        
-        .section-subtitle {
-            font-size: 22px;
-            color: #b8b8b8;
-            margin-bottom: 80px;
-            line-height: 1.8;
-        }
-        
-        .value-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
-            max-width: 1100px;
-            margin: 0 auto;
+            max-width: 1200px;
+            margin: -80px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
         }
-        
-        .value-card {
-            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
-            border: 2px solid rgba(212, 175, 55, 0.3);
+
+        .stat-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(218,165,32,0.3);
+            padding: 40px 30px;
             border-radius: 20px;
-            padding: 50px 40px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .value-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #d4af37, #f9e79f);
-        }
-        
-        .value-card:hover {
-            transform: translateY(-10px);
-            border-color: #d4af37;
-            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
-        }
-        
-        .value-icon {
-            font-size: 64px;
-            margin-bottom: 25px;
-        }
-        
-        .value-card h3 {
-            font-size: 28px;
-            font-weight: 700;
-            color: #d4af37;
-            margin-bottom: 20px;
-        }
-        
-        .value-card p {
-            font-size: 17px;
-            color: #b8b8b8;
-            line-height: 1.8;
-        }
-        
-        /* Curriculum Section */
-        .curriculum-section {
-            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-            padding: 120px 20px;
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        
-        .week-card {
-            background: linear-gradient(135deg, #000, #0a0a0a);
-            border: 2px solid rgba(212, 175, 55, 0.3);
-            border-radius: 25px;
-            padding: 60px 50px;
-            margin-bottom: 40px;
-            transition: all 0.4s ease;
-            position: relative;
-        }
-        
-        .week-card:hover {
-            border-color: #d4af37;
-            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.4);
-            transform: translateX(10px);
-        }
-        
-        .week-number {
-            position: absolute;
-            top: -20px;
-            left: 50px;
-            background: linear-gradient(135deg, #d4af37, #f9e79f);
-            color: #000;
-            padding: 10px 30px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 900;
-            letter-spacing: 2px;
-        }
-        
-        .week-card h3 {
-            font-size: 36px;
-            font-weight: 900;
-            color: #d4af37;
-            margin-bottom: 15px;
-            margin-top: 20px;
-            font-family: 'Noto Serif KR', serif;
-        }
-        
-        .week-card .week-subtitle {
-            font-size: 20px;
-            color: #f4e5a1;
-            margin-bottom: 35px;
-            font-style: italic;
-        }
-        
-        .week-content {
-            display: grid;
-            gap: 25px;
-        }
-        
-        .content-block h4 {
-            font-size: 22px;
-            color: #d4af37;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        
-        .content-list {
-            list-style: none;
-            margin-left: 20px;
-        }
-        
-        .content-list li {
-            font-size: 17px;
-            color: #b8b8b8;
-            margin-bottom: 12px;
-            padding-left: 30px;
-            position: relative;
-            line-height: 1.7;
-        }
-        
-        .content-list li::before {
-            content: '◆';
-            position: absolute;
-            left: 0;
-            color: #d4af37;
-            font-size: 12px;
-        }
-        
-        .week-result {
-            background: rgba(212, 175, 55, 0.1);
-            border-left: 4px solid #d4af37;
-            padding: 20px 25px;
-            margin-top: 30px;
-            border-radius: 10px;
-            font-size: 18px;
-            color: #f4e5a1;
-            font-weight: 600;
-        }
-        
-        /* Benefits Section */
-        .benefits-section {
-            background: #000;
-            padding: 120px 20px;
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 35px;
-            max-width: 1100px;
-            margin: 80px auto;
-        }
-        
-        .benefit-card {
-            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
-            border: 2px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
-            padding: 45px 35px;
-            transition: all 0.4s ease;
-        }
-        
-        .benefit-card:hover {
-            border-color: #d4af37;
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
-        }
-        
-        .benefit-icon {
-            font-size: 56px;
-            margin-bottom: 25px;
-        }
-        
-        .benefit-card h4 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #d4af37;
-            margin-bottom: 18px;
-        }
-        
-        .benefit-card p {
-            font-size: 16px;
-            color: #b8b8b8;
-            line-height: 1.8;
-        }
-        
-        .benefit-card ul {
-            list-style: none;
-            margin-top: 20px;
-        }
-        
-        .benefit-card ul li {
-            font-size: 15px;
-            color: #b8b8b8;
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .benefit-card ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #d4af37;
-            font-weight: 900;
-        }
-        
-        /* Instructor Section */
-        .instructor-section {
-            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-            padding: 120px 20px;
-        }
-        
-        .instructor-card {
-            max-width: 900px;
-            margin: 0 auto;
-            background: linear-gradient(135deg, #000, #0a0a0a);
-            border: 3px solid #d4af37;
-            border-radius: 30px;
-            padding: 70px 60px;
             text-align: center;
         }
-        
-        .instructor-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #d4af37, #f9e79f);
-            color: #000;
-            padding: 12px 35px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-        }
-        
-        .instructor-name {
+
+        .stat-number {
             font-size: 48px;
             font-weight: 900;
-            color: #d4af37;
-            margin-bottom: 15px;
+            color: #ffd700;
             font-family: 'Noto Serif KR', serif;
         }
-        
-        .instructor-title {
-            font-size: 24px;
-            color: #f4e5a1;
-            margin-bottom: 35px;
-            font-weight: 600;
-        }
-        
-        .instructor-description {
-            font-size: 18px;
-            color: #b8b8b8;
-            line-height: 1.9;
-            margin-bottom: 40px;
-        }
-        
-        .credentials {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-        }
-        
-        .credential-item {
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 20px;
-            border-radius: 15px;
-            font-size: 15px;
-            color: #d4af37;
-            font-weight: 600;
-        }
-        
-        /* Legal Section */
-        .legal-section {
-            background: #000;
-            padding: 80px 20px;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        
-        .legal-box {
-            max-width: 900px;
-            margin: 0 auto;
-            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
-            border: 2px solid rgba(212, 175, 55, 0.3);
-            border-radius: 20px;
-            padding: 50px;
-        }
-        
-        .legal-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #d4af37;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .legal-content {
+
+        .stat-label {
             font-size: 16px;
-            color: #b8b8b8;
-            line-height: 2;
-            margin-bottom: 30px;
+            color: #c0c0c0;
+            margin-top: 10px;
         }
-        
-        .legal-highlight {
-            background: rgba(212, 175, 55, 0.1);
-            border-left: 4px solid #d4af37;
-            padding: 20px 25px;
-            margin: 20px 0;
-            border-radius: 10px;
-            font-size: 15px;
-            color: #d4d4d4;
+
+        /* 섹션 공통 */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        
-        /* Final CTA */
-        .final-cta {
-            background: linear-gradient(135deg, #000 0%, #1a1a2e 100%);
-            padding: 120px 20px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .final-cta h2 {
-            font-size: 64px;
+
+        h2 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 48px;
             font-weight: 900;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, #d4af37, #f9e79f);
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffd700, #fff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-family: 'Noto Serif KR', serif;
+            background-clip: text;
         }
-        
-        .final-cta p {
-            font-size: 24px;
-            color: #b8b8b8;
-            margin-bottom: 50px;
-            line-height: 1.8;
-        }
-        
-        .urgency {
-            font-size: 20px;
-            color: #d4af37;
-            font-weight: 700;
-            margin-top: 40px;
-            animation: blink 2s ease-in-out infinite;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-        
-        /* Footer */
-        footer {
-            background: #000;
-            padding: 60px 20px 30px;
+
+        .section-subtitle {
             text-align: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            font-size: 18px;
+            color: #999;
+            margin-bottom: 60px;
         }
-        
-        .footer-brand {
-            font-size: 32px;
+
+        /* 커리큘럼 */
+        .curriculum {
+            display: grid;
+            gap: 30px;
+        }
+
+        .week-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(218,165,32,0.2);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .week-card:hover {
+            border-color: rgba(218,165,32,0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(218,165,32,0.2);
+        }
+
+        .week-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #daa520, #ffd700);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 20px;
             font-weight: 900;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #d4af37, #f9e79f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
-        
+
+        .week-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .week-content {
+            color: #c0c0c0;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .week-content li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .week-content li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+        }
+
+        /* 혜택 섹션 */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .benefit-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(218,165,32,0.2);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .benefit-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .benefit-desc {
+            color: #c0c0c0;
+            line-height: 1.6;
+        }
+
+        /* 법적 고지 */
+        .legal {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(218,165,32,0.2);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 60px;
+        }
+
+        .legal h3 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .legal p {
+            color: #999;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* 푸터 */
+        footer {
+            background: #000;
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 1px solid rgba(218,165,32,0.2);
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 900;
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-family: 'Noto Serif KR', serif;
+        }
+
         .footer-text {
-            font-size: 16px;
-            color: #888;
-            margin-bottom: 30px;
-        }
-        
-        .contact-info {
-            font-size: 16px;
-            color: #b8b8b8;
-            margin: 20px 0;
-        }
-        
-        .copyright {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-            font-size: 14px;
             color: #666;
+            font-size: 14px;
+            line-height: 1.6;
         }
-        
-        /* Responsive */
+
+        /* 반응형 */
         @media (max-width: 768px) {
-            .hero h1 {
+            h1 {
                 font-size: 42px;
             }
             
-            .hero .tagline {
-                font-size: 24px;
+            .title-highlight {
+                font-size: 52px;
             }
             
-            .price-hero {
-                font-size: 56px;
+            .hero-price {
+                font-size: 36px;
             }
             
-            .section-title {
-                font-size: 38px;
+            h2 {
+                font-size: 32px;
             }
             
-            .week-card {
-                padding: 40px 30px;
-            }
-            
-            .week-card h3 {
-                font-size: 28px;
-            }
-            
-            .final-cta h2 {
-                font-size: 42px;
+            .stats {
+                margin-top: 40px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <div class="hero">
+
+    <!-- 히어로 섹션 -->
+    <section class="hero">
         <div class="hero-content">
-            <div class="exclusive-badge">⭐ EXCLUSIVE VIP PROGRAM ⭐</div>
-            <h1>프리미엄<br>작가 데뷔 프로그램</h1>
-            <p class="tagline">4주 만에 완성하는 진짜 작가의 여정</p>
-            <p class="subtitle">
-                네이버에서 검색되는 작가로<br>
-                우리 아이의 이름을 새겨드립니다
+            <div class="badge">AI 동화책 창작 프로그램</div>
+            <h1>
+                우리 아이를<br>
+                <span class="title-highlight">진짜 책</span>을 만드는
+            </h1>
+            <p class="hero-subtitle">
+                4주 만에 실물책 출판부터 네이버 인물 등록까지<br>
+                완벽하게 완성하는 창작 프로그램
             </p>
-            
-            <div class="price-hero">2,000,000<span style="font-size: 40px;">원</span></div>
-            <p class="price-note">실물책 출판 + 네이버 인물 등록 완성</p>
-            
-            <button class="cta-primary" onclick="window.open('https://invite.kakao.com/tc/KzpequWeSE', '_blank')">
-                💎 VIP 상담 신청하기
-            </button>
-        </div>
-    </div>
-
-    <!-- Stats -->
-    <div class="stats-section">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-number">4주</div>
-                <div class="stat-label">프리미엄 집중 과정</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">1:1</div>
-                <div class="stat-label">VIP 맞춤 멘토링</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">100%</div>
-                <div class="stat-label">출판 성공률</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">평생</div>
-                <div class="stat-label">남는 작가 경력</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Value Proposition -->
-    <section class="value-section">
-        <div class="container">
-            <h2 class="section-title">왜 이 프로그램인가?</h2>
-            <p class="section-subtitle">
-                단순한 체험이 아닌, 진짜 작가로 만드는 프로페셔널 과정
-            </p>
-            
-            <div class="value-grid">
-                <div class="value-card">
-                    <div class="value-icon">👑</div>
-                    <h3>검증된 전문가</h3>
-                    <p>중고생 출판 프로젝트 500만원 고액 클래스 운영. 15년 경력 로아아트북스 대표가 직접 지도합니다.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">📚</div>
-                    <h3>진짜 출판</h3>
-                    <p>ISBN 발급, 출판사 등록, 네이버 인물 등록까지. 체험이 아닌 실제 작가로 데뷔합니다.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">💎</div>
-                    <h3>프리미엄 퀄리티</h3>
-                    <p>전문 편집, 교정교열, POD 실물책 제작. 서점에서 파는 책과 동일한 퀄리티를 보장합니다.</p>
-                </div>
-            </div>
+            <div class="hero-price">2,000,000원</div>
+            <p style="color: #999; margin-bottom: 30px;">4주 완성 • 소수정예 5~10명</p>
+            <a href="https://invite.kakao.com/tc/KzpequWeSE" class="cta-btn" target="_blank">지금 바로 상담 신청</a>
         </div>
     </section>
 
-    <!-- Curriculum -->
-    <section class="curriculum-section">
-        <div class="container">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">4주 커리큘럼</h2>
-            <p class="section-subtitle" style="text-align: center; margin-bottom: 80px;">
-                체계적이고 집중적인 프로 작가 양성 프로그램
+    <!-- 통계 섹션 -->
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">4주</div>
+            <div class="stat-label">완벽한 커리큘럼</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">5~10명</div>
+            <div class="stat-label">소수정예 관리</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">네이버 인물 등록</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">15년</div>
+            <div class="stat-label">전문 경력</div>
+        </div>
+    </div>
+
+    <!-- 가치 제안 -->
+    <section>
+        <h2>왜 200만원인가요?</h2>
+        <p class="section-subtitle">단순한 수업이 아닌, 내 책을 만드는 특별한 프로그램입니다</p>
+        
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(218,165,32,0.2); padding: 60px 40px; border-radius: 20px; text-align: center;">
+            <p style="font-size: 22px; line-height: 2; color: #e0e0e0;">
+                📚 <strong style="color: #ffd700;">실물책 POD 출판</strong> (표지/본문 편집 + 교정교열 포함)<br>
+                🆔 <strong style="color: #ffd700;">ISBN 발급 및 출판사 등록</strong><br>
+                🌐 <strong style="color: #ffd700;">네이버 인물 등록 완료</strong><br>
+                👤 <strong style="color: #ffd700;">1:1 맞춤 멘토링</strong> (주 2회, 총 8회)<br>
+                🎨 <strong style="color: #ffd700;">프리미엄 AI 도구 마스터</strong> (Midjourney, ChatGPT)<br>
+                📞 <strong style="color: #ffd700;">카톡 무제한 질의응답</strong> (4주 내내)<br>
+                ⚖️ <strong style="color: #ffd700;">저작권 보호</strong> (로아아트북스 법적 관리)
             </p>
-            
+        </div>
+    </section>
+
+    <!-- 커리큘럼 -->
+    <section>
+        <h2>4주 완성 커리큘럼</h2>
+        <p class="section-subtitle">매주 90분 수업으로 내 책을 완성합니다</p>
+        
+        <div class="curriculum">
             <!-- 1주차 -->
             <div class="week-card">
-                <div class="week-number">WEEK 1</div>
-                <h3>AI로 나만의 이야기 만들기</h3>
-                <p class="week-subtitle">"아이디어를 책으로 바꾸는 마법"</p>
-                
-                <div class="week-content">
-                    <div class="content-block">
-                        <h4>✨ AI 도구 완전 정복</h4>
-                        <ul class="content-list">
-                            <li>Midjourney로 영화 같은 그림 만들기</li>
-                            <li>ChatGPT로 멋진 이야기 쓰기</li>
-                            <li>내가 상상한 장면을 AI가 그려줘요!</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="content-block">
-                        <h4>📖 스토리 만들기</h4>
-                        <ul class="content-list">
-                            <li>주인공 캐릭터 만들기 (성격, 외모, 특징)</li>
-                            <li>재미있는 이야기 구조 배우기</li>
-                            <li>독자가 감동하는 장면 연출하기</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="content-block">
-                        <h4>🎯 내 작품 기획</h4>
-                        <ul class="content-list">
-                            <li>어떤 책을 만들지 정하기</li>
-                            <li>목차와 줄거리 완성하기</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="week-result">👉 1주 후: 내 책의 전체 구조 완성!</div>
+                <span class="week-number">1주차</span>
+                <h3 class="week-title">✨ AI로 이야기 만들기</h3>
+                <ul class="week-content">
+                    <li><strong>Midjourney</strong>로 상상 속 그림을 현실로</li>
+                    <li><strong>ChatGPT</strong>로 전문 작가처럼 글쓰기</li>
+                    <li>나만의 캐릭터와 세계관 구상하기</li>
+                    <li>목차와 전체 줄거리 완성</li>
+                    <li><strong>1주 후:</strong> 우리 아이의 이야기 완성!</li>
+                </ul>
             </div>
 
             <!-- 2주차 -->
             <div class="week-card">
-                <div class="week-number">WEEK 2</div>
-                <h3>프로처럼 책 디자인하기</h3>
-                <p class="week-subtitle">"내 책을 멋지게 꾸미는 시간"</p>
-                
-                <div class="week-content">
-                    <div class="content-block">
-                        <h4>🎨 표지 디자인</h4>
-                        <ul class="content-list">
-                            <li>서점에서 팔리는 책처럼 표지 만들기</li>
-                            <li>제목, 작가 이름 예쁘게 배치하기</li>
-                            <li>눈에 확 띄는 색깔 고르기</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="content-block">
-                        <h4>📝 본문 만들기</h4>
-                        <ul class="content-list">
-                            <li>50페이지 분량 내용 완성</li>
-                            <li>글과 그림 조화롭게 배치</li>
-                            <li>읽기 편한 글자 크기와 간격</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="content-block">
-                        <h4>✍️ 전문가 손길</h4>
-                        <ul class="content-list">
-                            <li>하라쿠 작가님이 직접 편집 제공</li>
-                            <li>맞춤법, 문장 다듬기 (교정교열)</li>
-                            <li>완벽한 책으로 만들어드려요</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="week-result">👉 2주 후: 출판 준비 완료!</div>
+                <span class="week-number">2주차</span>
+                <h3 class="week-title">🎨 책 디자인 & 편집</h3>
+                <ul class="week-content">
+                    <li>독자를 사로잡는 <strong>표지 디자인</strong></li>
+                    <li>50페이지 분량 본문 구성</li>
+                    <li>글자 크기, 간격, 레이아웃 최적화</li>
+                    <li><strong>교정교열</strong>은 로아아트북스가 완벽하게 진행</li>
+                    <li><strong>2주 후:</strong> 출판 준비 완료!</li>
+                </ul>
             </div>
 
             <!-- 3주차 -->
             <div class="week-card">
-                <div class="week-number">WEEK 3</div>
-                <h3>진짜 작가로 등록하기</h3>
-                <p class="week-subtitle">"우리 아이 이름이 작가로 올라가요"</p>
-                
-                <div class="week-content">
-                    <div class="content-block">
-                        <h4>📚 실물책 출판</h4>
-                        <ul class="content-list">
-                            <li>POD로 진짜 종이책 만들기</li>
-                            <li>서점에서 파는 책과 똑같은 퀄리티</li>
-                            <li>완성된 내 책을 손에 쥐어요!</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="content-block">
-                        <h4>🏆 작가 등록</h4>
-                        <ul class="content-list">
-                            <li>ISBN 발급 (책 고유번호)</li>
-                            <li>출판사 등록</li>
-                            <li>교보문고, 예스24에서 검색돼요!</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="content-block">
-                        <h4>✨ 작가 브랜딩</h4>
-                        <ul class="content-list">
-                            <li>작가 소개 만들기</li>
-                            <li>작가 사진 촬영 & 프로필 작성</li>
-                            <li>SNS 작가 계정 만들기</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="week-result">👉 3주 후: 진짜 작가 탄생!</div>
+                <span class="week-number">3주차</span>
+                <h3 class="week-title">📚 진짜 책으로 출판</h3>
+                <ul class="week-content">
+                    <li><strong>POD 실물책 출판</strong> (손에 잡히는 내 책!)</li>
+                    <li><strong>ISBN 발급</strong> + 출판사 등록</li>
+                    <li>서점에서 검색되는 진짜 책</li>
+                    <li>작가 브랜딩 (사진, 소개글, 프로필, SNS)</li>
+                    <li><strong>3주 후:</strong> 우리 아이의 실물책 완성!</li>
+                </ul>
             </div>
 
             <!-- 4주차 -->
             <div class="week-card">
-                <div class="week-number">WEEK 4</div>
-                <h3>네이버 인물 등록 완성</h3>
-                <p class="week-subtitle">"검색하면 나오는 작가님"</p>
-                
-                <div class="week-content">
-                    <div class="content-block">
-                        <h4>🌐 네이버 인물 등록</h4>
-                        <ul class="content-list">
-                            <li>네이버에서 아이 이름 검색하면 나와요!</li>
-                            <li>작가 프로필, 출판 책 정보 등록</li>
-                            <li>평생 남는 작가 경력</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="content-block">
-                        <h4>💼 작가 포트폴리오</h4>
-                        <ul class="content-list">
-                            <li>다음 작품 준비 가이드</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="content-block">
-                        <h4>🎉 출판 기념 이벤트</h4>
-                        <ul class="content-list">
-                            <li>책 소개 영상 만들기</li>
-                            <li>지인들과 출판 기념 파티</li>
-                            <li>다음 작품 아이디어 회의</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="week-result">👉 4주 후: 네이버에서 검색되는 작가 완성! 🎉</div>
+                <span class="week-number">4주차</span>
+                <h3 class="week-title">🌟 네이버 인물 등록 완성</h3>
+                <ul class="week-content">
+                    <li><strong>네이버 검색에 작가로 등록</strong></li>
+                    <li>작가 포트폴리오 정리</li>
+                    <li>출판 기념 이벤트 기획</li>
+                    <li>다음 작품 아이디어 회의</li>
+                    <li><strong>4주 후:</strong> 네이버에서 내 이름 검색!</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <!-- Benefits -->
-    <section class="benefits-section">
-        <div class="container">
-            <h2 class="section-title" style="text-align: center;">프리미엄 혜택</h2>
-            <p class="section-subtitle" style="text-align: center;">
-                200만원에 모두 포함된 VIP 패키지
+    <!-- 포함 혜택 -->
+    <section>
+        <h2>이 모든 것이 포함됩니다</h2>
+        <p class="section-subtitle">추가 비용 없이 모두 제공됩니다</p>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">📚</div>
+                <h4 class="benefit-title">출판 올인원 패키지</h4>
+                <p class="benefit-desc">표지 디자인, 본문 편집, 교정교열, POD 실물책 제작까지 모두 포함</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🆔</div>
+                <h4 class="benefit-title">ISBN 발급 & 출판사 등록</h4>
+                <p class="benefit-desc">ISBN 발급 비용 포함, 정식 출판사 등록까지 대행</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🌐</div>
+                <h4 class="benefit-title">네이버 인물 등록</h4>
+                <p class="benefit-desc">네이버 검색 시 작가로 등록되어 평생 남는 포트폴리오</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">👨‍🏫</div>
+                <h4 class="benefit-title">1:1 맞춤 멘토링</h4>
+                <p class="benefit-desc">주 2회 개인 피드백 (총 8회) + 카톡 무제한 질의응답</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🎨</div>
+                <h4 class="benefit-title">프리미엄 AI 도구 활용법</h4>
+                <p class="benefit-desc">Midjourney, ChatGPT 등 최신 AI 도구 마스터</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">♾️</div>
+                <h4 class="benefit-title">평생 지원</h4>
+                <p class="benefit-desc">수료 후에도 계속되는 작가 활동 지원</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 강사 소개 -->
+    <section>
+        <h2>누가 가르치나요?</h2>
+        <p class="section-subtitle">15년 경력의 전문 작가가 직접 지도합니다</p>
+        
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(218,165,32,0.2); padding: 60px 40px; border-radius: 20px; text-align: center;">
+            <div style="font-size: 72px; margin-bottom: 20px;">👩‍💼</div>
+            <h3 style="font-size: 32px; color: #ffd700; margin-bottom: 15px; font-family: 'Noto Serif KR', serif;">하라쿠 작가</h3>
+            <p style="font-size: 18px; color: #c0c0c0; line-height: 1.8;">
+                ✦ 로아아트AI연구소 대표<br>
+                ✦ 동화책 & 전자책 전문 작가 15년 경력<br>
+                ✦ AI 기술 + 출판 전문가<br>
+                ✦ 네이버 인물 등록 완료<br>
+                ✦ 실제 출판 경험 100권 이상
             </p>
-            
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">💎</div>
-                    <h4>1:1 VIP 멘토링</h4>
-                    <ul>
-                        <li>주 2회 개인 피드백 (총 8회)</li>
-                        <li>카톡으로 언제든 질문 가능</li>
-                        <li>작품 완성까지 밀착 관리</li>
-                    </ul>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎨</div>
-                    <h4>프리미엄 도구</h4>
-                    <ul>
-                        <li>AI 구독은 개별 진행</li>
-                        <li>전문 AI 툴 사용법 완전 마스터</li>
-                        <li>하라쿠 작가의 노하우 전수</li>
-                    </ul>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">📚</div>
-                    <h4>출판 올인원 패키지</h4>
-                    <ul>
-                        <li>표지/본문 전문 편집 제공</li>
-                        <li>교정교열 완료본 제공</li>
-                        <li>POD 실물책 제작비 포함</li>
-                    </ul>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">👑</div>
-                    <h4>작가 데뷔 완성</h4>
-                    <ul>
-                        <li>ISBN 발급비 포함</li>
-                        <li>출판사 등록</li>
-                        <li>네이버 인물 등록 완료</li>
-                    </ul>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">💬</div>
-                    <h4>평생 지원</h4>
-                    <ul>
-                        <li>수업 후에도 질문 가능</li>
-                        <li>다음 작품 컨설팅</li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- Instructor -->
-    <section class="instructor-section">
-        <div class="container">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 80px;">강사 소개</h2>
-            
-            <div class="instructor-card">
-                <div class="instructor-badge">⭐ 15년 경력 출판 전문가</div>
-                <h3 class="instructor-name">하라쿠 작가</h3>
-                <p class="instructor-title">로아아트북스 대표 | 로아아트AI연구소 대표</p>
-                <p class="instructor-description">
-                    "단순히 AI 도구 사용법을 가르치는 게 아닙니다.<br>
-                    아이들이 진짜 작가로 성장하는 과정,<br>
-                    그 특별한 순간을 함께합니다."
-                </p>
-                
-                <div class="credentials">
-                    <div class="credential-item">📚 하라쿠로 브랜드 작가</div>
-                    <div class="credential-item">✍️ 동화책·전자책 다수 출판</div>
-                    <div class="credential-item">🎵 음원 발매 아티스트</div>
-                    <div class="credential-item">🎬 유튜브 크리에이터</div>
-                    <div class="credential-item">💰 중고생 출판 500만원 클래스</div>
-                    <div class="credential-item">🤖 AI 창작 기술 연구</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Legal -->
-    <section class="legal-section">
-        <div class="legal-box">
-            <h3 class="legal-title">중요 안내사항</h3>
-            
-            <div class="legal-content">
-                <h4 style="color: #d4af37; margin-bottom: 15px;">📋 저작권 및 교육 자료 보호</h4>
-                <div class="legal-highlight">
-                    본 수업의 모든 교육 콘텐츠, 커리큘럼, 교육 자료의 저작권은 <strong>로아아트북스</strong>에 있습니다. 
-                    수업 내용의 무단 복제, 녹음, 녹화, 배포, 2차 저작물 제작 및 상업적 이용을 금지하며, 
-                    이를 위반할 경우 법적 책임을 물을 수 있습니다. 
-                    수업 자료는 수강생 본인의 학습 목적으로만 사용 가능합니다.
-                </div>
-                
-                <h4 style="color: #d4af37; margin: 30px 0 15px;">👥 소수정예 운영</h4>
-                <div class="legal-highlight">
-                    <strong>5~10명만</strong> 모집합니다. 한 명 한 명 밀착 관리하며, 퀄리티 보장을 위한 소수 운영입니다.
-                </div>
-                
-                <h4 style="color: #d4af37; margin: 30px 0 15px;">⏰ 선착순 마감</h4>
-                <div class="legal-highlight">
-                    자리가 매우 제한적입니다. 상담 후 빠른 결정을 권장합니다.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final CTA -->
-    <section class="final-cta">
-        <div class="container">
-            <h2>지금 시작하지 않으면<br>언제 시작하시겠어요?</h2>
+    <!-- 법적 고지 -->
+    <section>
+        <div class="legal">
+            <h3>⚠️ 저작권 및 교육 자료 보호 안내</h3>
             <p>
-                4주 후, 네이버에서 검색되는 작가가 됩니다<br>
-                우리 아이에게 평생 남는 경력을 선물하세요
+                본 프로그램의 모든 교육 자료, 커리큘럼, 강의 내용은 <strong style="color: #ffd700;">로아아트북스(LOAART BOOKS)</strong>의 저작권으로 보호됩니다.
             </p>
-            <button class="cta-primary" onclick="window.open('https://invite.kakao.com/tc/KzpequWeSE', '_blank')">
-                💎 VIP 상담 신청하기
-            </button>
-            <p class="urgency">⚠️ 5~10명 한정 모집 | 조기 마감 가능</p>
+            <p>
+                ❌ <strong>무단 복제, 배포, 재판매, 2차 가공 및 외부 공유는 법적으로 금지</strong>됩니다.<br>
+                ❌ 수업 중 제공되는 자료를 타인에게 공유하거나 온라인에 게시할 수 없습니다.<br>
+                ✅ 위반 시 저작권법에 따라 민형사상 책임을 물을 수 있습니다.
+            </p>
+            <p style="margin-top: 20px; font-size: 16px; color: #666;">
+                교육 자료는 수강생 본인의 학습 목적으로만 사용 가능하며, 수료 후에도 동일한 규정이 적용됩니다.
+            </p>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-brand">LOAART BOOKS</div>
-        <p class="footer-text">
-            AI와 예술의 융합을 통해 새로운 창작의 미래를 만들어갑니다
+    <!-- 최종 CTA -->
+    <section style="text-align: center; padding: 100px 20px;">
+        <h2 style="margin-bottom: 30px;">선착순 10명 한정 모집</h2>
+        <p style="font-size: 22px; color: #c0c0c0; margin-bottom: 50px;">
+            지금 신청하지 않으면 다음 기수를 기다려야 합니다<br>
+            4주 후, 네이버에서 우리 아이 이름을 검색해보세요
         </p>
-        <div class="contact-info">
-            <p>📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="03606c6d77626077436f6c62627177616c6c68702d606c6e">[email&#160;protected]</a></p>
-            <p>🏢 로아아트AI연구소</p>
-        </div>
-        <p class="copyright">
-            © 2026 LOAART BOOKS. All rights reserved.
+        <a href="https://invite.kakao.com/tc/KzpequWeSE" class="cta-btn" target="_blank" style="font-size: 24px; padding: 25px 70px;">
+            🎯 지금 바로 신청하기
+        </a>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-logo">LOAART BOOKS</div>
+        <p class="footer-text">
+            로아아트AI연구소 | 대표: 하라쿠<br>
+            초등 3~6학년 대상 • 소수정예 5~10명<br>
+            문의: <a href="/cdn-cgi/l/email-protection#533f3c327d322127656a6413343e323a3f7d303c3e" style="color: #ffd700; text-decoration: none;"><span class="__cf_email__" data-cfemail="ef83808ec18e9d9bd9d6d8af88828e8683c18c8082">[email&#160;protected]</span></a><br>
+            © 2026 LOAART BOOKS. All Rights Reserved.
         </p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // 스크롤 애니메이션
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
-        document.querySelectorAll('.week-card, .value-card, .benefit-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.8s ease';
-            observer.observe(el);
-        });
-    </script>
-</body>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
 </html>
